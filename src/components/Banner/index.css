@@ -1,0 +1,18 @@
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 20px;
+}
+
+.banner-title {
+  color: #888;
+  font-size: 28px;
+  line-height: 80px;
+}
+
+.banner-userName {
+  color: #666;
+  cursor: pointer;
+  font-size: 16px;
+}
