@@ -40,8 +40,13 @@
 }
 
 .search-result-item>div {
+  color: #555;
+  cursor: pointer;
   width: 480px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.search-result-item>div:hover {
+  color: #777;
 }
