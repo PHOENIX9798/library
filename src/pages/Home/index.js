@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel, Input, Row, Col, Radio, Button } from 'antd';
+import { Carousel, Input, Row, Col, Radio } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { GetPicList, GetBookList } from '../../api'
 import Banner from '../../components/Banner';
@@ -26,7 +26,7 @@ class Home extends React.Component {
         pic: res.data.data,
       })
     });
-    GetBookList(1, 10).then(res => {
+    GetBookList(1, 10,'').then(res => {
       this.setState({
         bookList: res.data.data.slice(-5),
       })
@@ -36,6 +36,10 @@ class Home extends React.Component {
   onSearch = value => {
     this.props.history.push({ pathname: '/search', query: { searchValue: value } });
   };
+
+  toDetail=(item)=> {
+    this.props.history.push({ pathname: `/details/${item.id}`, query: {item,operation:'take'} });
+  }
 
   render() {
     const { pic, bookList } = this.state;
@@ -58,8 +62,8 @@ class Home extends React.Component {
               <Radio.Group value={1}>
                 <Radio value={1}>全部资源</Radio>
               </Radio.Group>
-              <br /><br />
-              <div className="home-contents">注：通过资源检索找到对应借阅书目</div>
+              <br />
+              <div className="home-contents">用户名：1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码：123456<br/>左上角logo返回首页，仅支持网站内跳转</div>
             </div>
           </Col>
           <Col span={12}>
@@ -83,7 +87,7 @@ class Home extends React.Component {
             {
               bookList.length > 0 && bookList.map(item => {
                 return (
-                  <div className="home-newBooks-item" key={item.id}>
+                  <div className="home-newBooks-item" key={item.id} onClick={()=>this.toDetail(item)}>
                     <img src={item.img} alt="" />
                     <div>{item.bookName}</div>
                   </div>)
